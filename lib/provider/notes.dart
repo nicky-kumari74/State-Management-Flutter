@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:state_management/provider/dbHelper.dart';
+import 'package:state_management/provider/notes_provider.dart';
 
 
 
@@ -37,7 +39,11 @@ class Notes extends StatelessWidget{
                   ),
                 ),
                 Container(height: 40,),
-                ElevatedButton(onPressed: addNote,
+                ElevatedButton(onPressed: (){
+                  final ttl=title.text;
+                  final ds=desc.text;
+                  Provider.of<NotesProvider>(context,listen: false).addNotes(ttl, ds);
+                },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.lightBlueAccent,    // change background color for better visibility.
                         padding: EdgeInsets.only(left: 120,right: 120,top: 11,bottom: 11),
@@ -56,13 +62,6 @@ class Notes extends StatelessWidget{
     final ttl=title.text;
     final ds=desc.text;
     await dbHelper.addNotes(ttl, ds);
-    loadNotes();
+  }
 
-  }
-  void loadNotes() async{
-    final data=await dbHelper.getNotes();
-    notes=data;
-    print("hello");
-    print(notes);
-  }
 }
