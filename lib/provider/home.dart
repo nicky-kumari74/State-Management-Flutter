@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:state_management/provider/notes.dart';
 import 'package:state_management/provider/notes_provider.dart';
+import 'package:state_management/provider/theme_provider.dart';
 import 'package:state_management/provider/update_notes.dart';
 
 class HomePage extends StatelessWidget {
@@ -10,7 +11,14 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home",),
+        title: Text("Home ",),
+        actions: [
+          Switch(
+              value: Provider.of<ThemeProvider>(context).isDarkMode,
+              onChanged: (value){
+                Provider.of<ThemeProvider>(context,listen: false).toggleTheme();
+              })
+        ],
       ),
       body: Consumer<NotesProvider>(
           builder: (ctx,provider,__){

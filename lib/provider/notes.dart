@@ -45,11 +45,10 @@ class Notes extends StatelessWidget{
                   Provider.of<NotesProvider>(context,listen: false).addNotes(ttl, ds);
                 },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.lightBlueAccent,    // change background color for better visibility.
                         padding: EdgeInsets.only(left: 120,right: 120,top: 11,bottom: 11),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))
                     ),
-                    child: Text("Add",)
+                     child: Text("Add",)
                 )
               ],
             ),
