@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:state_management/provider/notes.dart';
 import 'package:state_management/provider/notes_provider.dart';
+import 'package:state_management/provider/update_notes.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -25,10 +26,14 @@ class HomePage extends StatelessWidget {
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            IconButton(onPressed: (){},
+                            IconButton(onPressed: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>updateNotes(notes[indx]['title'],notes[indx]['desc'],notes[indx]['id'])));
+                            },
                                 icon: Icon(Icons.edit,color: Colors.blue,size: 20,)
                             ),
-                            IconButton(onPressed: (){},
+                            IconButton(onPressed: (){
+                              Provider.of<NotesProvider>(context,listen: false).deletenotes(notes[indx]['id']);
+                            },
                                 icon: Icon(Icons.delete,color: Colors.blue,size: 20,)
                             )
                           ],

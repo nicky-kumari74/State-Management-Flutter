@@ -16,4 +16,21 @@ class NotesProvider with ChangeNotifier{
     _notes= await _helper.getNotes();
     notifyListeners();
   }
+  Future<void> updatenotes(int id,String newtitle,String newdesc) async{
+    var res= await _helper.updateNotes(id, newtitle, newdesc);
+    print("response : $res");
+    if(res==1){
+      _notes=await _helper.getNotes();
+      notifyListeners();
+    }
+
+  }
+  Future<void> deletenotes(int id) async {
+    var res = await _helper.deleteNotes(id);
+    print("response : $res");
+    if (res == 1) {
+      _notes = await _helper.getNotes();
+      notifyListeners();
+    }
+  }
 }

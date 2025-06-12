@@ -27,6 +27,16 @@ class DBHelper{
         conflictAlgorithm: ConflictAlgorithm.replace
     );
   }
+  Future<int> updateNotes(int id,String newtitle,String newdesc) async {
+    final dbclient=await db;
+    return await dbclient.update('notes',
+        {'title':newtitle,'desc':newdesc}, where: 'id = ?',whereArgs: [id]
+    );
+  }
+  Future<int> deleteNotes(int id) async{
+    final dbclient =await db;
+    return await dbclient.delete('notes',where: 'id=?',whereArgs: [id]);
+  }
   Future<List<Map<String,dynamic>>> getNotes() async{
     final dbclient = await db;
     return await dbclient.query('notes');
